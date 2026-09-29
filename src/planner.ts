@@ -3,7 +3,9 @@ import type { Capability, ExecutionPlan, FusionRequest } from "./types.js";
 const infer = (goal: string): Capability[] => {
   const g = goal.toLowerCase();
   const caps = new Set<Capability>(["reasoning"]);
-  if (/image|photo|art|portrait|caricature/.test(g)) caps.add("image.transform");
+  if (/image|photo|art|portrait|caricature|poster|logo/.test(g)) caps.add("image.transform");
+  if (/video|mp4|reel|tiktok|commercial|short/.test(g)) { caps.add("vision.analysis"); caps.add("video.edit"); caps.add("artifact.package"); caps.add("artifact.store"); }
+  if (/mp3|song|music|audio/.test(g)) { caps.add("audio.generate"); caps.add("artifact.package"); caps.add("artifact.store"); }
   if (/face|identity|likeness|reference/.test(g)) caps.add("identity.preserve");
   if (/code|app|software|api|game|unreal/.test(g)) {
     caps.add("code.generate"); caps.add("code.review"); caps.add("test.execute"); caps.add("artifact.package");
@@ -26,6 +28,8 @@ export function plan(request: FusionRequest): ExecutionPlan {
       if (ids.get("code.review")) d.push(ids.get("code.review")!);
       else if (ids.get("code.generate")) d.push(ids.get("code.generate")!);
     }
+    if (c === "video.edit" && ids.get("vision.analysis")) d.push(ids.get("vision.analysis")!);
+    if (c === "artifact.store" && ids.get("artifact.package")) d.push(ids.get("artifact.package")!);
     if (c === "artifact.package") {
       if (ids.get("test.execute")) d.push(ids.get("test.execute")!);
       else if (ids.get("code.generate")) d.push(ids.get("code.generate")!);
