@@ -1,7 +1,7 @@
 import { execute, type ProviderRunner } from "./executor.js";
 import { plan } from "./planner.js";
 import { CapabilityRegistry } from "./registry.js";
-import { verify } from "./verifier.js";
+import { verify } from "./verifier.js";\nimport { buildRepairPlan } from "./repair.js";
 import type { FusionRequest } from "./types.js";
 
 export class ForgeFrameFusion {
@@ -20,7 +20,7 @@ export class ForgeFrameFusion {
       plan: executionPlan,
       results,
       verification,
-      needsRepair: !verification.passed,
+      needsRepair: !verification.passed,\n      repairPlan,
     };
   }
 }
