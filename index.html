@@ -49,8 +49,33 @@ body:before{background-image:linear-gradient(#38d9ff09 1px,transparent 1px),line
 /* CONCEPT VAULT */
 .legacy{margin:100px 0 45px}.legacy-head{max-width:980px;margin-bottom:38px}.legacy-head>span{font-size:10px;letter-spacing:.4em;color:#6ee9ff}.legacy h2{font:900 clamp(38px,7vw,92px)/.88 Impact,Haettenschweiler,"Arial Narrow Bold",sans-serif;letter-spacing:-.025em;margin:12px 0 18px}.legacy h2 i{font-style:normal;background:linear-gradient(90deg,#f6d467,#ff7044,#9b5dff,#57eaff);-webkit-background-clip:text;color:transparent}.legacy-head p{color:#aaa;max-width:650px}.vault{display:grid;grid-template-columns:1.25fr .75fr;grid-auto-rows:minmax(300px,auto);gap:10px}.concept{position:relative;overflow:hidden;padding:34px;display:flex;flex-direction:column;justify-content:flex-end;min-height:360px;border:1px solid #ffffff18;background:#080912}.concept:before{content:"";position:absolute;inset:0;z-index:0;background:radial-gradient(circle at 70% 20%,var(--flare,#5de7ff55),transparent 35%),linear-gradient(145deg,transparent 25%,#000c 82%)}.concept:after{content:"FF";position:absolute;right:-2%;top:-12%;font:900 210px/1 Impact,sans-serif;color:transparent;-webkit-text-stroke:1px #ffffff12;transform:skew(-8deg)}.concept>*{position:relative;z-index:1}.concept small{color:#74eaff;letter-spacing:.28em}.concept h3{font:900 clamp(34px,5vw,68px)/.9 Impact,sans-serif;margin:10px 0;letter-spacing:.02em}.concept p{max-width:520px;color:#b9b9c4}.concept b{margin-top:18px;font-size:10px;letter-spacing:.18em;color:#f3cf68}.concept.auto{--flare:#ff713f55;grid-row:span 2;min-height:730px}.concept.hyperion{--flare:#5ee7ff55}.concept.warp{--flare:#9c5dff66}.concept.blacktop{--flare:#f2c75d55}.concept.mobility{--flare:#ff4b3955}.concept.legion{--flare:#6f55ff55}.concept:hover{border-color:#72eaff88;transform:translateY(-2px);transition:.25s;box-shadow:0 0 45px #6c4dff18}
 @media(max-width:760px){.vault{grid-template-columns:1fr}.concept.auto{grid-row:auto;min-height:420px}.concept{min-height:300px}.legacy{margin-top:70px}}
+
+/* FORGEFRAME // BEYOND v10 */
+:root{--ion:#62efff;--nova:#b35cff;--solar:#ffd369;--hot:#ff5a36}
+body{background:#02030a;isolation:isolate}
+body:before{opacity:1;background:
+linear-gradient(180deg,#02030ab5 0,#02030a55 38%,#02030af2 88%),
+radial-gradient(ellipse at 50% 16%,#6630b93d 0,transparent 33%),
+radial-gradient(ellipse at 78% 20%,#00cfff2b 0,transparent 25%),
+radial-gradient(ellipse at 18% 36%,#ff773020 0,transparent 26%),
+repeating-linear-gradient(115deg,transparent 0 78px,#62efff08 79px,transparent 80px)}
+body:after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:
+radial-gradient(circle at 20% 20%,#fff 0 1px,transparent 1.5px),
+radial-gradient(circle at 70% 12%,#fff 0 1px,transparent 1.5px),
+radial-gradient(circle at 85% 52%,#63eaff 0 1px,transparent 1.5px);background-size:190px 190px,270px 270px,330px 330px;opacity:.35}
+.top{clip-path:polygon(0 0,96% 0,100% 30%,100% 100%,4% 100%,0 70%);border:1px solid #65eaff55!important;background:linear-gradient(90deg,#060816ee,#16102aee 48%,#071822ee)!important;box-shadow:0 0 50px #7d49ff24!important}
+.forge-sigil{position:relative;width:94px;height:62px;filter:drop-shadow(0 0 10px #5cecff88) drop-shadow(0 0 24px #a152ff55);transform:skew(-10deg)}
+.forge-sigil:before,.forge-sigil:after{content:"";position:absolute;inset:3px 46px 3px 0;background:linear-gradient(160deg,#fff7c4,#f4cf67 26%,#ff7542 50%,#a45cff 72%,#59ebff);clip-path:polygon(0 0,100% 0,75% 25%,45% 25%,45% 43%,86% 43%,65% 66%,45% 66%,45% 100%,0 100%)}
+.forge-sigil:after{inset:3px 0 3px 46px;transform:scaleX(-1)}.forge-sigil span{display:none}
+.brand b{font:900 24px/1 Impact,Haettenschweiler,"Arial Narrow Bold",sans-serif!important;letter-spacing:.22em!important;background:linear-gradient(100deg,#fff8cb,#f3ca5d 30%,#ff7042 53%,#a75eff 75%,#58eaff)!important;-webkit-background-clip:text!important;color:transparent!important;filter:drop-shadow(0 0 14px #6de9ff45)}
+.brand small{display:block;margin-top:5px;color:#71eaff!important;letter-spacing:.38em!important;font-size:8px!important}
+.hero{min-height:500px}.hero:before{content:"FORGE";right:-5%;top:-30px;font:900 clamp(180px,32vw,430px)/1 Impact,sans-serif!important;-webkit-text-stroke:1px #7beaff18!important;transform:skew(-8deg);filter:drop-shadow(0 0 50px #914eff25)!important}
+.hero .eyebrow{color:#6eeaff!important}.hero h1{max-width:1150px!important;font-size:clamp(54px,9vw,116px)!important;letter-spacing:-.04em!important}.hero h1 em{background:linear-gradient(90deg,#ffca5f,#ff633f,#b05cff,#56eaff);-webkit-background-clip:text;color:transparent!important;text-shadow:none!important}
+.hero p{font-size:18px;max-width:800px}.workspace{margin-top:-8px}
+.legacy{position:relative}.legacy:before{content:"FORGEFRAME // ARCHIVE 001";position:absolute;right:0;top:-36px;color:#ffffff35;font-size:9px;letter-spacing:.35em}
+@media(max-width:720px){.forge-sigil{width:66px;height:46px}.forge-sigil:before{inset:3px 32px 3px 0}.forge-sigil:after{inset:3px 0 3px 32px}.brand b{font-size:17px!important;letter-spacing:.13em!important}.brand small{letter-spacing:.18em!important}.hero{min-height:420px}}
 </style></head><body><div class="app">
-<header class="top"><div class="mark"><div class="ff"><b>FF</b></div><div class="brand"><b>FORGEFRAME</b><small>FUSION</small></div></div><div class="live">ORCHESTRATION CORE ONLINE</div></header>
+<header class="top"><div class="mark"><div class="forge-sigil" aria-label="ForgeFrame"><span>F</span><span>F</span></div><div class="brand"><b>FORGEFRAME</b><small>F U S I O N // CREATIVE INTELLIGENCE</small></div></div><div class="live">ORCHESTRATION CORE ONLINE</div></header>
 <section class="hero"><div class="eyebrow">ENGINEERED TO INSPIRE · BUILT TO BE REMEMBERED</div><h1><span style="font-style:italic;letter-spacing:-.055em;background:linear-gradient(180deg,#fff3ad 0,#d4af37 35%,#725014 65%,#f4d77b 100%);-webkit-background-clip:text;color:transparent;filter:drop-shadow(0 8px 8px #000)">FORGEFRAME</span> <em>FUSION</em><br><span style="font-size:.32em;letter-spacing:.22em;color:#fff">YOUR IDEA. FORGED INTO REALITY.</span></h1><p>Bring the idea, photo, video, document, code, or reference. Fusion understands the goal, breaks it apart, routes each piece to the right capability, checks the work, repairs weak spots, and assembles the deliverable.</p></section>
 <section class="workspace"><div class="bar"><span>FUSION // COMMAND CENTER</span><span>LIVE COMMAND CENTER</span></div><div class="composer">
 <textarea id="goal" placeholder="What do you want finished? Example: Use these photos and my idea to create the complete campaign, artwork, copy, and launch package."></textarea>
