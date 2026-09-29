@@ -2,12 +2,26 @@ import type { FusionRequest, StepResult, VerificationResult } from "./types.js";
 
 export function verify(request: FusionRequest, results: StepResult[]): VerificationResult {
   const failures: string[] = [];
+  const failedStepIds = new Set<string>();
   if (!results.length) failures.push("No execution results were produced.");
+
+  for (const result of results) {
+    if (result.error || result.output === undefined || result.output === null) {
+      failedStepIds.add(result.stepId);
+      failures.push(`Step ${result.stepId} did not produce a usable result${result.error ? `: ${result.error}` : "."}`);
+    }
+  }
+
+  const required = request.requiredCapabilities ?? [];
+  for (const capability of required) {
+    if (!results.some((r) => r.capability === capability && !r.error && r.output !== undefined && r.output !== null)) {
+      failures.push(`Required capability ${capability} has no successful result.`);
+    }
+  }
+
   const preserve = request.constraints?.preserve ?? [];
   if (preserve.length && !results.length) failures.push("Preservation constraints could not be evaluated.");
-  return {
-    passed: failures.length === 0,
-    score: failures.length === 0 ? 1 : 0,
-    failures,
-  };
+
+  const passed = failures.length === 0;
+  return { passed, score: passed ? 1 : Math.max(0, 1 - failures.length / Math.max(1, results.length + required.length)), failures, failedStepIds: [...failedStepIds] };
 }
