@@ -20,6 +20,31 @@ body{overflow-x:hidden}body:after{content:"";position:fixed;inset:0;pointer-even
 .hero{min-height:420px;display:flex;flex-direction:column;justify-content:center}.hero h1{font-family:Impact,Haettenschweiler,"Arial Narrow Bold",sans-serif;font-weight:900;text-transform:uppercase;max-width:1100px}.hero h1 em{font-family:inherit}.hero p{border-left:2px solid var(--gold);padding-left:18px}
 .workspace{clip-path:polygon(0 0,96% 0,100% 34px,100% 100%,4% 100%,0 calc(100% - 34px));border-radius:0;background:linear-gradient(135deg,#0b0d10f5,#11100bf2 52%,#07090cf5)}.workspace:before{border-radius:0}.bar{background:linear-gradient(90deg,#15130d,#090b0e);border-bottom-color:#715719;color:#d6bd73}.composer{padding:26px 28px}.tool{border-radius:3px;border-color:#4a3c20;background:linear-gradient(#171717,#0b0b0b);text-transform:uppercase;font-weight:800;letter-spacing:.06em}.tool:hover{box-shadow:0 0 20px #d4af3730}.run{border-radius:2px;clip-path:polygon(8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%,0 8px);letter-spacing:.12em;padding-inline:30px}.stage{border-radius:2px;clip-path:polygon(5px 0,100% 0,100% calc(100% - 5px),calc(100% - 5px) 100%,0 100%,0 5px)}.result{border-radius:0;clip-path:polygon(0 0,98% 0,100% 18px,100% 100%,0 100%)}.promise{gap:1px;background:#574516;border:1px solid #574516}.card{border:0;border-radius:0;min-height:130px}.card b{letter-spacing:.12em}.foot{border-top:1px solid #342b16;padding-top:20px;letter-spacing:.08em}
 @media(max-width:720px){.ff{width:64px;height:48px}.hero{min-height:360px}.workspace{clip-path:polygon(0 0,94% 0,100% 24px,100% 100%,6% 100%,0 calc(100% - 24px))}.composer{padding:20px 16px}}
+
+/* FUSION COSMIC FORGE v9 */
+:root{--gold:#f0c75e;--void:#02030a;--plasma:#38d9ff;--violet:#8c52ff;--ember:#ff5d38}
+body{background:
+radial-gradient(circle at 14% 10%,#5420a62d,transparent 26%),
+radial-gradient(circle at 85% 18%,#00c8ff25,transparent 24%),
+radial-gradient(circle at 52% 72%,#ff7a1820,transparent 26%),
+linear-gradient(150deg,#010207 0,#080916 42%,#03040a 100%)}
+body:before{background-image:linear-gradient(#38d9ff09 1px,transparent 1px),linear-gradient(90deg,#8c52ff08 1px,transparent 1px);background-size:48px 48px;mask-image:linear-gradient(to bottom,#000,transparent 80%)}
+.top{background:linear-gradient(90deg,transparent,#11152b99,transparent);padding:16px 20px;border:1px solid #4cc9ff2b;box-shadow:0 0 45px #6e42ff16,inset 0 0 35px #29cfff0b}
+.ff{background:conic-gradient(from 210deg,#fff7c6,#f2c75d,#ff6d35,#8d4cff,#35dfff,#fff7c6);filter:drop-shadow(0 0 8px #48dfff) drop-shadow(0 0 24px #8d4cff88)}
+.brand b{font-size:22px;letter-spacing:.16em;background:linear-gradient(90deg,#fff,#f3c85d 30%,#ff7840 52%,#8d62ff 72%,#52e7ff);-webkit-background-clip:text;color:transparent;filter:drop-shadow(0 0 12px #8d62ff55)}
+.brand small{color:#74e9ff;letter-spacing:.45em}
+.hero:before{color:transparent;-webkit-text-stroke:1px #59ddff24;text-shadow:80px 10px 80px #873dff33}
+.hero h1 span:first-child{background:linear-gradient(100deg,#fff 0,#f7d674 25%,#ff7048 48%,#a36cff 70%,#5be7ff 92%);-webkit-background-clip:text!important;color:transparent!important;filter:drop-shadow(0 0 18px #6edfff40)!important}
+.workspace{background:linear-gradient(145deg,#090b18ed,#100d1bed 48%,#06121bed);border-color:#52dfff73;box-shadow:0 0 70px #7744ff1c,0 0 28px #30dfff16,inset 0 0 70px #101b382c}
+.workspace:before{background:linear-gradient(115deg,#5ce9ff,#8c52ff 25%,#ff6d38 48%,#f4ce65 68%,#53e8ff)}
+.bar{background:linear-gradient(90deg,#0c1020,#171027,#07151e);color:#70eaff;border-bottom-color:#6b4cff55}
+.tool{border-color:#654d9b;background:linear-gradient(145deg,#15162b,#0b111b);box-shadow:inset 0 0 20px #764eff12}.tool:hover{border-color:#5ceaff;box-shadow:0 0 24px #5ceaff2c}
+.run{background:linear-gradient(100deg,#f1c95d,#ff7544 34%,#9a59ff 67%,#48e4ff);color:#05040a;box-shadow:0 0 28px #8c52ff55}
+.stage{border-color:#4b3d7a;background:linear-gradient(145deg,#101326,#0a0b13)}.stage i{background:linear-gradient(90deg,#f3ca5d,#ff7042,#9c5cff,#4de7ff)}
+.promise{background:#433d78;border-color:#433d78}.card{background:linear-gradient(145deg,#0e1121,#090a10)}.card b{color:#67e7ff}
+.music-dock{margin:18px 0 0;display:flex;align-items:center;gap:14px;padding:12px 14px;background:linear-gradient(90deg,#0b0d18e8,#161025e8,#07131ae8);border:1px solid #6749a6;box-shadow:0 0 28px #8d52ff1c}
+.music-icon{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;font-size:20px;background:linear-gradient(145deg,#fa2d55,#b624f2);box-shadow:0 0 20px #d92cff55}.music-copy{flex:1}.music-copy b{display:block;font-size:12px;letter-spacing:.08em}.music-copy small{color:#999}.music-connect{border:1px solid #d654ff;background:#b72ce51b;color:#fff;padding:9px 14px;font-weight:800;cursor:pointer}.music-connect:hover{background:#b72ce538}
+@media(max-width:720px){.top{padding:12px}.brand b{font-size:15px}.brand small{letter-spacing:.22em}.music-copy small{display:none}}
 </style></head><body><div class="app">
 <header class="top"><div class="mark"><div class="ff"><b>FF</b></div><div class="brand"><b>FORGEFRAME</b><small>FUSION</small></div></div><div class="live">ORCHESTRATION CORE ONLINE</div></header>
 <section class="hero"><div class="eyebrow">ENGINEERED TO INSPIRE · BUILT TO BE REMEMBERED</div><h1><span style="font-style:italic;letter-spacing:-.055em;background:linear-gradient(180deg,#fff3ad 0,#d4af37 35%,#725014 65%,#f4d77b 100%);-webkit-background-clip:text;color:transparent;filter:drop-shadow(0 8px 8px #000)">FORGEFRAME</span> <em>FUSION</em><br><span style="font-size:.32em;letter-spacing:.22em;color:#fff">YOUR IDEA. FORGED INTO REALITY.</span></h1><p>Bring the idea, photo, video, document, code, or reference. Fusion understands the goal, breaks it apart, routes each piece to the right capability, checks the work, repairs weak spots, and assembles the deliverable.</p></section>
