@@ -300,6 +300,7 @@ document.addEventListener('DOMContentLoaded',function(){
    recognizer.onend=function(){recognizer=null;q('#voiceInput').textContent='🎙 TALK TO FUSION'};
    try{recognizer.start();q('#voiceInput').textContent='LISTENING · TAP TO STOP';setStatus('Listening… your spoken request will send automatically.')}catch(e){recognizer=null;setStatus('Could not start the microphone. Please try again.')}
  });
+ function fileToDataURL(file){return new Promise(function(resolve,reject){var r=new FileReader();r.onload=function(){resolve(r.result)};r.onerror=function(){reject(new Error('Could not read the attached photo.'))};r.readAsDataURL(file)})}
  function clearAttachments(){selected=[];fileBox.textContent='';['camera','photos','videos','docs'].forEach(function(id){q('#'+id).value=''})}
  q('#clearFiles').addEventListener('click',clearAttachments);
  q('#connectChat').addEventListener('click',function(){
@@ -327,7 +328,24 @@ document.addEventListener('DOMContentLoaded',function(){
    message('YOU',prompt||'Style my photo');pending=message('FUSION','On it. Choosing the right tool…');out.scrollIntoView({behavior:'smooth',block:'start'});
    try{
      if(choice==='music'){window.openMusic();pending.body.textContent='Your music player is open. Choose a track and press play.';return}
-     if(choice==='image-ai'){pending.body.textContent='I understand this as an AI image transformation request. Your photo is attached correctly. Fusion does not yet have a free image-generation provider connected, so I will not send your photo to text chat or pretend an image was created. Use Photo effects for the local styles available now; AI character art will unlock here when a zero-cost image provider is connected.';setStatus('AI image request recognized · image provider not connected · no charge made.');return}
+     if(choice==='image-ai'){
+       if(!window.puter)throw new Error('Fusion image service did not load. Reload and try again.');
+       if(!puter.auth.isSignedIn())throw new Error('Tap CONNECT FREE CHAT first. That sign-in also enables image creation.');
+       var imageFile=files.filter(function(f){return /^image\/(jpeg|png|webp)$/.test(f.type)})[0];
+       if(!imageFile)throw new Error('Attach a JPG, PNG or WebP photo.');
+       pending.body.textContent='Preparing your photo…';
+       var referenceData=await fileToDataURL(imageFile);
+       pending.body.textContent='Creating your image inside Fusion…';
+       setStatus('Fusion image generation is running.');
+       var generated;
+       try{generated=await puter.ai.txt2img({prompt:'Create a polished image from the attached reference. Follow this request: '+prompt,input_images:[referenceData]})}
+       catch(e){var msg=e&&e.message||'Image generation could not finish.';if(/insufficient|credit|allowance|fund/i.test(msg))throw new Error('Your included Puter AI allowance is used up. Fusion did not switch to paid generation.');throw new Error(msg)}
+       if(!generated)throw new Error('No image was returned. Try again.');
+       pending.body.textContent='Your ForgeFrame image is ready.';
+       generated.style.maxWidth='100%';generated.style.height='auto';generated.style.display='block';generated.style.margin='16px 0';pending.card.appendChild(generated);
+       clearAttachments();goal.value='';setStatus('Image ready inside Fusion.');
+       return
+     }
      if(choice==='research'||choice==='github'){pending.body.textContent='Searching '+(choice==='github'?'GitHub repositories':'Wikipedia references')+'…';referenceText=await research(prompt,choice);pending.body.textContent='Sources found below.';if(!window.puter||!puter.auth.isSignedIn()){setStatus('Search complete. Connect free chat if you also want AI synthesis.');return}}
      if(choice==='photo'){await photoEffect(files,q('#photoStyle').value);setStatus('Photo ready. Download the PNG below.');pending.body.textContent='Your styled photo is ready below.';return}
      if(choice==='voice'){var spoken=prompt.replace(/^(read aloud|read this|say)[: ,]*/i,'');speak(spoken);pending.body.textContent=spoken;return}
