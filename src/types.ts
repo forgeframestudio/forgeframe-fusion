@@ -40,6 +40,7 @@ export interface ExecutionPlan { goal: string; steps: PlanStep[]; }
 
 export interface StepResult {
   stepId: string;
+  capability?: Capability;
   providerId: string;
   output: unknown;
   latencyMs: number;
