@@ -15,7 +15,7 @@ textarea{width:100%;min-height:145px;border:0;outline:0;resize:vertical;backgrou
 </style></head><body><div class="app">
 <header class="top"><div class="mark"><div class="ff"><b>FF</b></div><div class="brand"><b>FORGEFRAME</b><small>FUSION</small></div></div><div class="live">ORCHESTRATION CORE ONLINE</div></header>
 <section class="hero"><div class="eyebrow">ENGINEERED TO INSPIRE · BUILT TO BE REMEMBERED</div><h1><span style="font-style:italic;letter-spacing:-.055em;background:linear-gradient(180deg,#fff3ad 0,#d4af37 35%,#725014 65%,#f4d77b 100%);-webkit-background-clip:text;color:transparent;filter:drop-shadow(0 8px 8px #000)">FORGEFRAME</span> <em>FUSION</em><br><span style="font-size:.32em;letter-spacing:.22em;color:#fff">YOUR IDEA. FORGED INTO REALITY.</span></h1><p>Bring the idea, photo, video, document, code, or reference. Fusion understands the goal, breaks it apart, routes each piece to the right capability, checks the work, repairs weak spots, and assembles the deliverable.</p></section>
-<section class="workspace"><div class="bar"><span>FUSION // COMMAND CENTER</span><span>ALPHA 0.2</span></div><div class="composer">
+<section class="workspace"><div class="bar"><span>FUSION // COMMAND CENTER</span><span>LIVE COMMAND CENTER</span></div><div class="composer">
 <textarea id="goal" placeholder="What do you want finished? Example: Use these photos and my idea to create the complete campaign, artwork, copy, and launch package."></textarea>
 <div id="files" class="files"></div>
 <div class="attachments">
@@ -36,6 +36,6 @@ const out=document.querySelector("#out"),goal=document.querySelector("#goal"),bt
 function render(){fileBox.innerHTML=selected.map((f,i)=>'<span class="chip">'+(f.type.startsWith("image/")?"▧ ":f.type.startsWith("video/")?"▶ ":"◆ ")+f.name+'</span>').join("")}
 btn.onclick=async()=>{if(!goal.value.trim()&&!selected.length){out.textContent="Tell Fusion what outcome you want or attach something first.";return}btn.disabled=true;stages.forEach(x=>x.classList.remove("on"));out.textContent="Fusion is reading your goal"+(selected.length?" and "+selected.length+" attached reference"+(selected.length>1?"s":""):"")+"…";
 for(let i=0;i<stages.length;i++){await new Promise(r=>setTimeout(r,130));stages[i].classList.add("on")}
-out.textContent="INPUT CAPTURED\n\nGoal: "+(goal.value.trim()||"Infer the desired outcome from the attached references.")+"\nReferences: "+(selected.length?selected.map(f=>f.name).join(", "):"none")+"\n\nThe multimodal ForgeFrame workspace is ready. Attached files remain in your browser in this static Alpha; secure server-side upload and real specialist execution require the Fusion runtime/API connection. The interface will never claim an AI/tool ran when it did not.";
+out.textContent="INPUT CAPTURED\n\nGoal: "+(goal.value.trim()||"Infer the desired outcome from the attached references.")+"\nReferences: "+(selected.length?selected.map(f=>f.name).join(", "):"none")+"\n\nFUSION INTAKE READY\n\nYour request and references are staged for orchestration. This public command center can capture multimodal inputs now. Secure remote specialist execution is awaiting a server runtime connection; no provider execution is claimed until that runtime is connected.";
 btn.disabled=false}
 </script></body></html>
