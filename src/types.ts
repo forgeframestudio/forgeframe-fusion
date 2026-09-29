@@ -1,18 +1,9 @@
 export type Capability =
-  | "reasoning"
-  | "vision.analysis"
-  | "image.generate"
-  | "image.transform"
-  | "identity.preserve"
-  | "pose.control"
-  | "segment"
-  | "upscale"
-  | "code.generate"
-  | "code.review"
-  | "research"
-  | "audio.generate"
-  | "video.generate"
-  | "threeD.generate";
+  | "reasoning" | "vision.analysis" | "image.generate" | "image.transform"
+  | "identity.preserve" | "pose.control" | "segment" | "upscale"
+  | "code.generate" | "code.review" | "research" | "audio.generate"
+  | "audio.transcribe" | "voice.synthesize" | "video.generate" | "threeD.generate"
+  | "test.execute" | "artifact.package";
 
 export interface Constraints {
   maxCostUsd?: number;
@@ -35,6 +26,7 @@ export interface ProviderProfile {
   estimatedLatencyMs: number;
   estimatedCostUsd: number;
   available: boolean;
+  local?: boolean;
 }
 
 export interface PlanStep {
@@ -44,20 +36,19 @@ export interface PlanStep {
   dependsOn: string[];
 }
 
-export interface ExecutionPlan {
-  goal: string;
-  steps: PlanStep[];
-}
+export interface ExecutionPlan { goal: string; steps: PlanStep[]; }
 
 export interface StepResult {
   stepId: string;
   providerId: string;
   output: unknown;
   latencyMs: number;
+  error?: string;
 }
 
 export interface VerificationResult {
   passed: boolean;
   score: number;
   failures: string[];
+  failedStepIds?: string[];
 }
