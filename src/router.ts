@@ -11,7 +11,9 @@ export function rank(candidates: ProviderProfile[], constraints: Constraints = {
     })
     .sort((a, b) => {
       const score = (p: ProviderProfile) =>
-        p.quality * 100 - p.estimatedCostUsd * 10 - p.estimatedLatencyMs / 1000;
+        p.quality * 100 -
+        p.estimatedCostUsd * 10 -
+        p.estimatedLatencyMs / 100;
       return score(b) - score(a);
     });
 }
