@@ -3,7 +3,7 @@ export type Capability =
   | "identity.preserve" | "pose.control" | "segment" | "upscale"
   | "code.generate" | "code.review" | "research" | "audio.generate"
   | "audio.transcribe" | "voice.synthesize" | "video.generate" | "threeD.generate"
-  | "test.execute" | "artifact.package";
+  | "test.execute" | "artifact.package" | "video.edit" | "artifact.store";
 
 export interface Constraints {
   maxCostUsd?: number;
@@ -12,8 +12,13 @@ export interface Constraints {
   preserve?: string[];
 }
 
+export type DeliverableKind = "text" | "image" | "video" | "audio" | "link" | "archive" | "document";
+
+export interface DeliverableSpec { kind: DeliverableKind; format?: string; }
+
 export interface FusionRequest {
   goal: string;
+  deliverables?: DeliverableSpec[];
   requiredCapabilities?: Capability[];
   constraints?: Constraints;
   inputs?: Record<string, unknown>;
