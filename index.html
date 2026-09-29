@@ -159,11 +159,39 @@ body:before{opacity:.12!important}
 <div id="projectModal" class="modal"><button onclick="closeProject()">×</button><small id="mk"></small><h2 id="mt"></h2><p id="mp"></p></div>
 <div id="accountModal" class="modal"><button onclick="closeAccount()">×</button><small>FORGEFRAME ID</small><h2>YOUR FORGE.<br>YOUR WORK.</h2><p>Account sign-in will keep projects, history and generated artifacts together. Google and email authentication activate when the secure Fusion runtime is connected.</p><button class="apple-auth" onclick="accountUnavailable()">CONTINUE WITH GOOGLE</button><button class="email-auth" onclick="accountUnavailable()">CONTINUE WITH EMAIL</button><p id="accountState" class="auth-state"></p></div><div id="musicModal" class="modal music-hub"><button onclick="closeMusic()">×</button><small>FORGEFRAME // SOUND SYSTEM</small><h2>MUSIC<br>IN THE FORGE.</h2><p>Paste a Spotify track, album or playlist link and play it directly inside Fusion. Apple Music personal-library playback stays available as the next secure integration.</p><div class="music-input"><input id="spotifyUrl" inputmode="url" placeholder="Paste Spotify link"><button onclick="loadSpotify()">LOAD</button></div><div id="spotifyPlayer" class="spotify-player"><div class="player-empty">PASTE A SPOTIFY LINK TO LOAD THE PLAYER</div></div><div class="music-actions"><button onclick="openAppleMusic()">APPLE MUSIC</button><button onclick="openYouTubeMusic()">YOUTUBE MUSIC</button></div><p id="musicMessage"></p></div>
 <script>
-const goal=document.querySelector('#goal'),out=document.querySelector('#out'),btn=document.querySelector('#run'),fileBox=document.querySelector('#files');let selected=[];
-['camera','photos','videos','docs'].forEach(id=>document.querySelector('#'+id).addEventListener('change',e=>{selected=[...selected,...e.target.files];fileBox.innerHTML=selected.map(f=>'<span>'+f.name+'</span>').join('')}));
-document.querySelectorAll('.prompt-chips button').forEach(x=>x.addEventListener('click',()=>seedPrompt(x.dataset.prompt)));
-btn.onclick=async()=>{if(!goal.value.trim()&&!selected.length){goal.focus();return}btn.textContent='FORGING…';await new Promise(r=>setTimeout(r,700));let s=goal.value.toLowerCase(),format=/video|reel|tiktok|mp4/.test(s)||selected.some(f=>f.type.startsWith('video/'))?'MP4 VIDEO':/audio|music|mp3/.test(s)?'MP3 AUDIO':/image|photo|art|poster|logo/.test(s)||selected.some(f=>f.type.startsWith('image/'))?'PNG / JPG':'DOWNLOADABLE ARTIFACT';out.innerHTML='<small>TARGET ARTIFACT // '+format+'</small><h2>SPECIFICATION LOCKED.</h2><p>'+esc(goal.value||'Create from attached references')+'</p><div class="truth">Fusion captured the build specification. The secure generation runtime is the remaining connection required before a real '+format+' can be rendered and delivered here.</div>';out.scrollIntoView({behavior:'smooth',block:'center'});btn.innerHTML='FORGE IT <b>→</b>'}
-function esc(s){return s.replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
-document.querySelectorAll('.show').forEach(x=>x.onclick=()=>{mk.textContent=x.dataset.k;mt.textContent=x.dataset.t;mp.textContent=x.dataset.p;projectModal.classList.add('open')});function openAccount(){accountModal.classList.add("open")}function closeAccount(){accountModal.classList.remove("open")}function accountUnavailable(){accountState.textContent="Secure account runtime is not connected on this static preview yet."}function closeProject(){projectModal.classList.remove("open")}function openMusic(){musicModal.classList.add("open")}function closeMusic(){musicModal.classList.remove("open")}function loadSpotify(){const v=spotifyUrl.value.trim();const m=v.match(/open\\.spotify\\.com\\/(track|album|playlist|episode|show)\\/([A-Za-z0-9]+)/);if(!m){musicMessage.textContent="Paste a Spotify track, album, playlist, episode or show link.";return}spotifyPlayer.innerHTML=`<iframe style="border-radius:12px" src="https://open.spotify.com/embed/${m[1]}/${m[2]}" width="100%" height="352" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>`;musicMessage.textContent="Spotify player loaded."}function openAppleMusic(){musicMessage.innerHTML="Apple Music account playback needs MusicKit credentials on the secure Fusion runtime. <strong>ForgeFrame will never collect your Apple password.</strong>"}function openYouTubeMusic(){window.open("https://music.youtube.com","_blank","noopener")}function seedPrompt(v){goal.value=v;goal.focus();goal.scrollIntoView({behavior:"smooth",block:"center"})}
-try{if(sessionStorage.getItem("fusionIntroSeen"))document.querySelector("#introFilm").style.display="none";else setTimeout(()=>sessionStorage.setItem("fusionIntroSeen","1"),7000)}catch(e){}
+(function(){
+'use strict';
+function q(s){return document.querySelector(s)}
+function qa(s){return Array.prototype.slice.call(document.querySelectorAll(s))}
+function open(id){var e=q(id);if(e)e.classList.add('open')}
+function close(id){var e=q(id);if(e)e.classList.remove('open')}
+window.openAccount=function(){open('#accountModal')};
+window.closeAccount=function(){close('#accountModal')};
+window.accountUnavailable=function(){var e=q('#accountState');if(e)e.textContent='Secure account runtime is not connected on this static preview yet.'};
+window.closeProject=function(){close('#projectModal')};
+window.openMusic=function(){open('#musicModal')};
+window.closeMusic=function(){close('#musicModal')};
+window.openAppleMusic=function(){var e=q('#musicMessage');if(e)e.innerHTML='Apple Music account playback needs MusicKit credentials on the secure Fusion runtime. <strong>ForgeFrame will never collect your Apple password.</strong>'};
+window.openYouTubeMusic=function(){window.open('https://music.youtube.com','_blank')};
+window.loadSpotify=function(){
+ var input=q('#spotifyUrl'),player=q('#spotifyPlayer'),msg=q('#musicMessage'); if(!input||!player)return;
+ var v=input.value.trim(),m=v.match(/open\.spotify\.com\/(track|album|playlist|episode|show)\/([A-Za-z0-9]+)/);
+ if(!m){if(msg)msg.textContent='Paste a Spotify track, album, playlist, episode or show link.';return}
+ player.innerHTML='<iframe style="border-radius:12px" src="https://open.spotify.com/embed/'+m[1]+'/'+m[2]+'" width="100%" height="352" frameborder="0" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>';
+ if(msg)msg.textContent='Spotify player loaded.';
+};
+function esc(s){return String(s).replace(/[&<>"']/g,function(m){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]})}
+document.addEventListener('DOMContentLoaded',function(){
+ var goal=q('#goal'),out=q('#out'),btn=q('#run'),fileBox=q('#files'),selected=[];
+ ['camera','photos','videos','docs'].forEach(function(id){var e=q('#'+id);if(e)e.addEventListener('change',function(ev){selected=selected.concat(Array.from(ev.target.files||[]));if(fileBox)fileBox.innerHTML=selected.map(function(f){return '<span>'+esc(f.name)+'</span>'}).join('')})});
+ qa('.prompt-chips button').forEach(function(x){x.addEventListener('click',function(){if(goal){goal.value=x.getAttribute('data-prompt')||'';goal.focus();goal.scrollIntoView({behavior:'smooth',block:'center'})}})});
+ qa('.show').forEach(function(x){x.addEventListener('click',function(){var mk=q('#mk'),mt=q('#mt'),mp=q('#mp');if(mk)mk.textContent=x.dataset.k||'';if(mt)mt.textContent=x.dataset.t||'';if(mp)mp.textContent=x.dataset.p||'';open('#projectModal')})});
+ if(btn)btn.addEventListener('click',function(){
+   if(!goal)return; if(!goal.value.trim()&&!selected.length){goal.focus();return}
+   btn.textContent='FORGING…';
+   setTimeout(function(){var s=goal.value.toLowerCase(),format=/video|reel|tiktok|mp4/.test(s)||selected.some(function(f){return f.type&&f.type.indexOf('video/')===0})?'MP4 VIDEO':/audio|music|mp3/.test(s)?'MP3 AUDIO':/image|photo|art|poster|logo/.test(s)||selected.some(function(f){return f.type&&f.type.indexOf('image/')===0})?'PNG / JPG':'DOWNLOADABLE ARTIFACT';if(out){out.innerHTML='<small>TARGET ARTIFACT // '+format+'</small><h2>SPECIFICATION LOCKED.</h2><p>'+esc(goal.value||'Create from attached references')+'</p><div class="truth">Fusion captured the build specification. The secure generation runtime is required before a real '+format+' can be delivered here.</div>';out.scrollIntoView({behavior:'smooth',block:'center'})}btn.innerHTML='FORGE IT <b>→</b>'},500)
+ });
+ try{var intro=q('#introFilm');if(intro&&sessionStorage.getItem('fusionIntroSeen'))intro.style.display='none';else setTimeout(function(){try{sessionStorage.setItem('fusionIntroSeen','1')}catch(e){}},7000)}catch(e){}
+});
+})();
 </script></body></html>
