@@ -329,20 +329,22 @@ document.addEventListener('DOMContentLoaded',function(){
    try{
      if(choice==='music'){window.openMusic();pending.body.textContent='Your music player is open. Choose a track and press play.';return}
      if(choice==='image-ai'){
-       if(!window.puter)throw new Error('Fusion image service did not load. Reload and try again.');
-       if(!puter.auth.isSignedIn())throw new Error('Tap CONNECT FREE CHAT first. That sign-in also enables image creation.');
        var imageFile=files.filter(function(f){return /^image\/(jpeg|png|webp)$/.test(f.type)})[0];
        if(!imageFile)throw new Error('Attach a JPG, PNG or WebP photo.');
-       pending.body.textContent='Preparing your photo…';
-       var referenceData=await fileToDataURL(imageFile);
-       pending.body.textContent='Creating your image inside Fusion…';
-       setStatus('Fusion image generation is running.');
-       var generated;
-       try{generated=await puter.ai.txt2img({prompt:'Create a polished image from the attached reference. Follow this request: '+prompt,input_images:[referenceData]})}
-       catch(e){var msg=e&&e.message||'Image generation could not finish.';if(/insufficient|credit|allowance|fund/i.test(msg))throw new Error('Your included Puter AI allowance is used up. Fusion did not switch to paid generation.');throw new Error(msg)}
-       if(!generated)throw new Error('No image was returned. Try again.');
+       pending.body.textContent='Preparing your photo for Fusion AI…';
+       setStatus('Fusion image engine is preparing your request.');
+       var form=new FormData();
+       form.append('prompt','Create a polished image from the attached reference. Preserve the recognizable subject and important visual details. Follow this request: '+prompt);
+       form.append('image',imageFile,imageFile.name||'reference');
+       var response=await fetch('https://forgeframe-fusion-ai.texans0422.workers.dev/image',{method:'POST',body:form});
+       var data=await response.json().catch(function(){return {}});
+       if(!response.ok||!data.ok||!data.image)throw new Error(data.detail||data.error||'Fusion image engine could not complete this request.');
+       var generated=document.createElement('img');
+       generated.src=data.image.indexOf('data:')===0?data.image:'data:'+(data.mimeType||'image/png')+';base64,'+data.image;
+       generated.alt='ForgeFrame Fusion generated image';
+       generated.style.maxWidth='100%';generated.style.height='auto';generated.style.display='block';generated.style.margin='16px 0';
        pending.body.textContent='Your ForgeFrame image is ready.';
-       generated.style.maxWidth='100%';generated.style.height='auto';generated.style.display='block';generated.style.margin='16px 0';pending.card.appendChild(generated);
+       pending.card.appendChild(generated);
        clearAttachments();goal.value='';setStatus('Image ready inside Fusion.');
        return
      }
