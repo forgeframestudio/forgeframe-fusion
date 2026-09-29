@@ -3,6 +3,8 @@ import { plan } from "./planner.js";
 import { CapabilityRegistry } from "./registry.js";
 import { verify } from "./verifier.js";
 import { buildRepairPlan } from "./repair.js";
+import { assemble } from "./assembler.js";
+import { completionReport } from "./completion.js";
 import type { ExecutionPlan, FusionRequest, StepResult } from "./types.js";
 
 export interface FusionOptions { maxRepairPasses?: number; }
@@ -30,6 +32,18 @@ export class ForgeFrameFusion {
       verification = verify(request, results);
     }
 
-    return { request, plan: executionPlan, results, repairs, verification, completed: verification.passed };
+    const assembled = assemble(request, results);
+    const completion = completionReport(assembled, verification);
+
+    return {
+      request,
+      plan: executionPlan,
+      results,
+      repairs,
+      assembled,
+      verification,
+      completion,
+      completed: completion.status === "complete",
+    };
   }
 }
