@@ -1,0 +1,9 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "forgeframe-fusion-ai",
+  "main": "cloudflare/worker.js",
+  "compatibility_date": "2026-09-29",
+  "ai": {
+    "binding": "AI"
+  }
+}
