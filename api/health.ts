@@ -1,0 +1,1 @@
+export default function handler(_req:any,res:any){res.status(200).json({service:"ForgeFrame Fusion",status:"online",version:"0.3.0",runtime:"server"});}
