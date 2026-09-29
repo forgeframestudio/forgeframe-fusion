@@ -6,4 +6,5 @@
   "ai": {
     "binding": "AI"
   }
+  // Cloudflare Git build trigger for Fusion AI gateway.
 }
