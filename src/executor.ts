@@ -37,7 +37,7 @@ export async function execute(
               step.dependsOn.map((id) => [id, completed.get(id)?.output]),
             ),
           });
-          return { stepId: step.id, providerId: provider.id, output, latencyMs: Date.now() - started };
+          return { stepId: step.id, capability: step.capability, providerId: provider.id, output, latencyMs: Date.now() - started };
         } catch (error) {
           lastError = error;
         }
