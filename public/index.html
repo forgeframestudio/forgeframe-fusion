@@ -182,8 +182,8 @@ window.openAppleMusic=function(){var e=q('#musicMessage');if(e)e.innerHTML='Appl
 window.openYouTubeMusic=function(){window.open('https://music.youtube.com','_blank')};
 window.loadSpotify=function(){
  var input=q('#spotifyUrl'),player=q('#spotifyPlayer'),msg=q('#musicMessage'); if(!input||!player)return;
- var v=input.value.trim(),m=v.match(/open\.spotify\.com\/(track|album|playlist|episode|show)\/([A-Za-z0-9]+)/);
- if(!m){if(msg)msg.textContent='Paste a Spotify track, album, playlist, episode or show link.';return}
+ var v=input.value.trim(),m=v.match(/open\\.spotify\\.com\\/(track|album|playlist|episode|show)\\/([A-Za-z0-9]+)/);
+ if(!m){var profile=v.match(/open\\.spotify\\.com\\\/(?:user\\\/)?([A-Za-z0-9._-]+)/);if(profile){if(msg)msg.innerHTML='That is a <b>Spotify profile link</b>. Spotify does not provide an embeddable player for a user profile. Open Spotify, choose a playlist / album / track, tap Share → Copy link, and paste that link here.';return}if(msg)msg.textContent='Paste a Spotify track, album, playlist, episode or show link.';return}
  player.innerHTML='<iframe style="border-radius:12px" src="https://open.spotify.com/embed/'+m[1]+'/'+m[2]+'" width="100%" height="352" frameborder="0" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>';
  if(msg)msg.textContent='Spotify player loaded.';
 };
