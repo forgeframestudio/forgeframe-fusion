@@ -50,7 +50,9 @@ export default {
       const image = incoming.get("image");
 
       if (!prompt) return json({ error: "A prompt is required." }, 400, origin);
+      if (prompt.length > 4000) return json({ error: "Prompt is too long." }, 400, origin);
       if (!(image instanceof File)) return json({ error: "A reference image is required." }, 400, origin);
+      if (image.size > 12 * 1024 * 1024) return json({ error: "Reference image must be under 12 MB." }, 413, origin);
       if (!["image/jpeg", "image/png", "image/webp"].includes(image.type)) {
         return json({ error: "Reference image must be JPG, PNG, or WebP." }, 400, origin);
       }
