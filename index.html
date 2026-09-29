@@ -263,8 +263,9 @@ document.addEventListener('DOMContentLoaded',function(){
    if(requested!=='auto')return requested;
    if(/^(open|play|show)( my| the)? music\b/i.test(prompt))return 'music';
    if(/^(read aloud|read this|say)\b/i.test(prompt))return 'voice';
-   if(files.some(function(f){return /^image\//.test(f.type)})&&/\b(gold|monochrome|black and white|black & white|poster|photo effect)\b/i.test(prompt)){
-     q('#photoStyle').value=/poster/i.test(prompt)?'poster':/monochrome|black (and|&) white/i.test(prompt)?'mono':'gold';return 'photo';
+   if(files.some(function(f){return /^image\//.test(f.type)})){
+     if(/\b(gold|monochrome|black and white|black & white|poster|photo effect)\b/i.test(prompt)){q('#photoStyle').value=/poster/i.test(prompt)?'poster':/monochrome|black (and|&) white/i.test(prompt)?'mono':'gold';return 'photo'}
+     if(/\b(character art|caricature|cartoon|anime|comic|cinematic|portrait|turn (me|my|this)|make (me|my|this)|create .*?(art|picture|image)|style (me|my|this)|transform)\b/i.test(prompt))return 'image-ai';
    }
    if(/\b(github|repositories|repos)\b/i.test(prompt)&&/\b(find|search|look up|research)\b/i.test(prompt))return 'github';
    if(/^(search|research|look up|find information|find references)\b/i.test(prompt))return 'research';
@@ -326,6 +327,7 @@ document.addEventListener('DOMContentLoaded',function(){
    message('YOU',prompt||'Style my photo');pending=message('FUSION','On it. Choosing the right tool…');out.scrollIntoView({behavior:'smooth',block:'start'});
    try{
      if(choice==='music'){window.openMusic();pending.body.textContent='Your music player is open. Choose a track and press play.';return}
+     if(choice==='image-ai'){pending.body.textContent='I understand this as an AI image transformation request. Your photo is attached correctly. Fusion does not yet have a free image-generation provider connected, so I will not send your photo to text chat or pretend an image was created. Use Photo effects for the local styles available now; AI character art will unlock here when a zero-cost image provider is connected.';setStatus('AI image request recognized · image provider not connected · no charge made.');return}
      if(choice==='research'||choice==='github'){pending.body.textContent='Searching '+(choice==='github'?'GitHub repositories':'Wikipedia references')+'…';referenceText=await research(prompt,choice);pending.body.textContent='Sources found below.';if(!window.puter||!puter.auth.isSignedIn()){setStatus('Search complete. Connect free chat if you also want AI synthesis.');return}}
      if(choice==='photo'){await photoEffect(files,q('#photoStyle').value);setStatus('Photo ready. Download the PNG below.');pending.body.textContent='Your styled photo is ready below.';return}
      if(choice==='voice'){var spoken=prompt.replace(/^(read aloud|read this|say)[: ,]*/i,'');speak(spoken);pending.body.textContent=spoken;return}
