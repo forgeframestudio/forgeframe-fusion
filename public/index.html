@@ -1,34 +1,41 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>ForgeFrame Fusion</title>
 <style>
-:root{color-scheme:dark;font-family:Inter,ui-sans-serif,system-ui;background:#07090d;color:#f5f7fb}*{box-sizing:border-box}
-body{margin:0;min-height:100vh;background:radial-gradient(circle at 70% 0,#12304a 0,transparent 38%),#07090d}
-main{max-width:980px;margin:auto;padding:56px 22px}.brand{letter-spacing:.28em;color:#d4af37;font-weight:800}.hero{font-size:clamp(44px,8vw,86px);line-height:.95;margin:18px 0}.hero span{color:#00a8ff}
-.sub{max-width:720px;color:#aeb8c7;font-size:18px;line-height:1.6}.panel{margin-top:38px;border:1px solid #263241;background:#0d1118cc;border-radius:24px;padding:22px;box-shadow:0 24px 80px #0008}
-textarea{width:100%;min-height:130px;background:#070a0f;border:1px solid #303d4d;border-radius:16px;padding:16px;color:white;font:inherit;resize:vertical}
-button{margin-top:14px;border:0;border-radius:14px;padding:14px 20px;font-weight:800;background:linear-gradient(135deg,#d4af37,#f1d878);color:#090909;cursor:pointer}
-.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:20px 0}.flow div{padding:10px 6px;text-align:center;border-radius:10px;background:#111a25;color:#90d7ff;font-size:12px}
-#out{white-space:pre-wrap;line-height:1.55;color:#d7e1ed;min-height:52px}.status{display:inline-flex;gap:8px;align-items:center;margin-top:20px;color:#8ee6ad}.dot{width:9px;height:9px;border-radius:50%;background:#55e184;box-shadow:0 0 16px #55e184}
-footer{margin-top:44px;color:#667386;font-size:13px}
-@media(max-width:700px){.flow{grid-template-columns:repeat(2,1fr)}}
-</style></head>
-<body><main>
-<div class="brand">FORGEFRAME // FUSION</div>
-<h1 class="hero">One request.<br><span>Every angle.</span></h1>
-<p class="sub">An outcome-first AI orchestration engine that plans, routes work to specialized capabilities, verifies results, repairs failures, and assembles the strongest deliverable available.</p>
-<div class="status"><i class="dot"></i> Fusion Alpha · orchestration core online</div>
-<section class="panel">
-<textarea id="goal" placeholder="Tell Fusion the outcome you want…">Build a complete plan and implementation package for my idea.</textarea>
-<button id="run">Run Fusion</button>
-<div class="flow"><div>UNDERSTAND</div><div>DECOMPOSE</div><div>ROUTE</div><div>VERIFY</div><div>DELIVER</div></div>
-<div id="out">Ready for the first ForgeFrame Fusion run.</div>
-</section>
-<footer>ForgeFrame Fusion · Engineered To Inspire. Built To Be Remembered.</footer>
-<script>
-const out=document.querySelector('#out'),btn=document.querySelector('#run'),goal=document.querySelector('#goal');
-btn.onclick=async()=>{btn.disabled=true;out.textContent='Understanding goal…\nDecomposing capabilities…\nRouting specialists…';
-await new Promise(r=>setTimeout(r,700));
-out.textContent='✓ Goal understood\n✓ Capability plan created\n✓ Specialist routing evaluated\n✓ Verification + repair loop ready\n\nALPHA RESULT\n'+goal.value+'\n\nThe live shell is working. Real provider adapters are connected only when authorized credentials/capabilities are available; Fusion will not pretend a provider ran when it did not.';
+:root{color-scheme:dark;font-family:Inter,ui-sans-serif,system-ui;--gold:#d4af37;--blue:#00a8ff;--ink:#050608;--steel:#151a20;--muted:#9da8b7}*{box-sizing:border-box}body{margin:0;min-height:100vh;color:#f7f8fa;background:radial-gradient(circle at 75% -10%,#06304d 0,transparent 28%),radial-gradient(circle at 15% 15%,#33270b 0,transparent 22%),linear-gradient(145deg,#030405,#090b0e 55%,#050608)}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.16;background:repeating-linear-gradient(135deg,transparent 0 24px,#fff 25px,transparent 26px)}
+.app{max-width:1180px;margin:auto;padding:28px 18px 60px}.top{display:flex;align-items:center;justify-content:space-between;gap:16px}.mark{display:flex;align-items:center;gap:12px}.ff{width:48px;height:48px;border:2px solid var(--gold);transform:rotate(45deg);display:grid;place-items:center;box-shadow:0 0 28px #d4af3740}.ff b{transform:rotate(-45deg);letter-spacing:-4px;color:var(--gold);font-size:20px}.brand b{display:block;letter-spacing:.23em}.brand small{color:var(--gold);letter-spacing:.28em}.live{font-size:12px;color:#9fe8b6}.live:before{content:"";display:inline-block;width:8px;height:8px;background:#52df83;border-radius:50%;margin-right:7px;box-shadow:0 0 14px #52df83}
+.hero{padding:56px 0 25px}.eyebrow{color:var(--gold);letter-spacing:.22em;font-weight:800;font-size:12px}.hero h1{font-size:clamp(42px,7vw,82px);line-height:.94;margin:13px 0;max-width:850px}.hero h1 em{font-style:normal;color:var(--blue);text-shadow:0 0 35px #00a8ff40}.hero p{max-width:740px;color:#aeb8c5;font-size:17px;line-height:1.55}
+.workspace{border:1px solid #343b45;border-radius:24px;background:linear-gradient(160deg,#101318e8,#080a0de8);box-shadow:0 30px 100px #000b,inset 0 1px #ffffff0d;overflow:hidden}.bar{padding:13px 18px;border-bottom:1px solid #252b33;color:#7e8998;font-size:12px;letter-spacing:.14em;display:flex;justify-content:space-between}.composer{padding:20px}
+textarea{width:100%;min-height:145px;border:0;outline:0;resize:vertical;background:transparent;color:#fff;font:500 18px/1.55 inherit}textarea::placeholder{color:#66717e}
+.attachments{display:flex;gap:9px;flex-wrap:wrap;padding:14px 0;border-top:1px solid #222831}.tool{position:relative;display:flex;align-items:center;gap:7px;border:1px solid #333b46;background:#11161c;color:#d9e0e8;border-radius:999px;padding:10px 13px;font-size:13px;cursor:pointer}.tool:hover{border-color:var(--gold)}.tool input{position:absolute;inset:0;opacity:0;cursor:pointer}.tool svg{width:17px;height:17px}.files{display:flex;gap:8px;flex-wrap:wrap;padding-bottom:10px}.chip{background:#17202a;border:1px solid #2d3b49;border-radius:9px;padding:7px 9px;color:#b9c7d5;font-size:11px;max-width:220px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.actions{display:flex;justify-content:space-between;align-items:center;gap:12px}.hint{font-size:12px;color:#697583}.run{border:0;border-radius:13px;padding:14px 22px;font-weight:900;background:linear-gradient(135deg,#b88b1c,#f2d36a);color:#080808;cursor:pointer;box-shadow:0 8px 30px #d4af3724}.run:disabled{opacity:.55}
+.pipeline{display:grid;grid-template-columns:repeat(9,1fr);gap:6px;margin-top:18px}.stage{border:1px solid #222a33;background:#0b0e12;border-radius:10px;padding:9px 4px;text-align:center;color:#647181;font-size:9px;letter-spacing:.08em}.stage.on{color:#82d5ff;border-color:#17547b;box-shadow:inset 0 0 18px #00a8ff12}.result{margin-top:18px;border-left:3px solid var(--gold);background:#090c10;border-radius:0 14px 14px 0;padding:18px;min-height:74px;color:#cbd5df;white-space:pre-wrap;line-height:1.55}.promise{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px}.card{border:1px solid #222932;border-radius:15px;background:#0b0e12aa;padding:16px}.card b{color:#f2d36a}.card p{color:#84909e;font-size:13px;line-height:1.45;margin-bottom:0}.foot{margin-top:30px;color:#596574;font-size:12px;display:flex;justify-content:space-between}
+@media(max-width:720px){.hero{padding-top:38px}.pipeline{grid-template-columns:repeat(3,1fr)}.promise{grid-template-columns:1fr}.hint{display:none}.brand b{font-size:13px}.live{display:none}}
+</style></head><body><div class="app">
+<header class="top"><div class="mark"><div class="ff"><b>FF</b></div><div class="brand"><b>FORGEFRAME</b><small>FUSION</small></div></div><div class="live">ORCHESTRATION CORE ONLINE</div></header>
+<section class="hero"><div class="eyebrow">FROM INTENTION TO EXECUTION</div><h1>Say what you want.<br><em>Fusion builds the outcome.</em></h1><p>Bring the idea, photo, video, document, code, or reference. Fusion understands the goal, breaks it apart, routes each piece to the right capability, checks the work, repairs weak spots, and assembles the deliverable.</p></section>
+<section class="workspace"><div class="bar"><span>FUSION // COMMAND CENTER</span><span>ALPHA 0.2</span></div><div class="composer">
+<textarea id="goal" placeholder="What do you want finished? Example: Use these photos and my idea to create the complete campaign, artwork, copy, and launch package."></textarea>
+<div id="files" class="files"></div>
+<div class="attachments">
+<label class="tool">📷 Camera<input id="camera" type="file" accept="image/*" capture="environment" multiple></label>
+<label class="tool">▧ Photos<input id="photos" type="file" accept="image/*" multiple></label>
+<label class="tool">▶ Video<input id="videos" type="file" accept="video/*" multiple></label>
+<label class="tool">＋ Files<input id="docs" type="file" accept=".pdf,.doc,.docx,.txt,.md,.csv,.json,.zip,.js,.ts,.tsx,.py,.cpp,.h,.uproject" multiple></label>
+</div>
+<div class="actions"><span class="hint">One request. Attach anything that helps. Fusion handles the workflow.</span><button class="run" id="run">FORGE IT →</button></div>
+</div></section>
+<div class="pipeline" id="pipe"><div class="stage">UNDERSTAND</div><div class="stage">DECOMPOSE</div><div class="stage">ROUTE</div><div class="stage">COLLABORATE</div><div class="stage">ASSEMBLE</div><div class="stage">CRITIQUE</div><div class="stage">REPAIR</div><div class="stage">VERIFY</div><div class="stage">DELIVER</div></div>
+<div class="result" id="out">Ready. Describe the finished result you want and add any references above.</div>
+<div class="promise"><div class="card"><b>MULTIMODAL INPUT</b><p>Camera, images, videos, documents and project files can travel with the goal.</p></div><div class="card"><b>CAPABILITY ROUTING</b><p>Fusion is designed to choose specialists by capability instead of locking the workflow to one provider.</p></div><div class="card"><b>OUTCOME FIRST</b><p>The target is a finished, verified deliverable—not a pile of instructions for you to assemble.</p></div></div>
+<footer class="foot"><span>FORGEFRAME FUSION</span><span>ENGINEERED TO INSPIRE. BUILT TO BE REMEMBERED.</span></footer>
+</div><script>
+const out=document.querySelector("#out"),goal=document.querySelector("#goal"),btn=document.querySelector("#run"),fileBox=document.querySelector("#files"),stages=[...document.querySelectorAll(".stage")];let selected=[];
+["camera","photos","videos","docs"].forEach(id=>document.querySelector("#"+id).addEventListener("change",e=>{selected=[...selected,...e.target.files];render()}));
+function render(){fileBox.innerHTML=selected.map((f,i)=>'<span class="chip">'+(f.type.startsWith("image/")?"▧ ":f.type.startsWith("video/")?"▶ ":"◆ ")+f.name+'</span>').join("")}
+btn.onclick=async()=>{if(!goal.value.trim()&&!selected.length){out.textContent="Tell Fusion what outcome you want or attach something first.";return}btn.disabled=true;stages.forEach(x=>x.classList.remove("on"));out.textContent="Fusion is reading your goal"+(selected.length?" and "+selected.length+" attached reference"+(selected.length>1?"s":""):"")+"…";
+for(let i=0;i<stages.length;i++){await new Promise(r=>setTimeout(r,130));stages[i].classList.add("on")}
+out.textContent="INPUT CAPTURED\n\nGoal: "+(goal.value.trim()||"Infer the desired outcome from the attached references.")+"\nReferences: "+(selected.length?selected.map(f=>f.name).join(", "):"none")+"\n\nThe multimodal ForgeFrame workspace is ready. Attached files remain in your browser in this static Alpha; secure server-side upload and real specialist execution require the Fusion runtime/API connection. The interface will never claim an AI/tool ran when it did not.";
 btn.disabled=false}
-</script></main></body></html>
+</script></body></html>
