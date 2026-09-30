@@ -429,7 +429,7 @@ document.addEventListener('DOMContentLoaded',function(){
      }
      if(choice==='website'){
        var html=String(reply||'').trim().replace(/^\`\`\`html\s*/i,'').replace(/\`\`\`$/,'').trim();
-       if(!/^<!doctype html>/i.test(html)||!/<\/html>\s*$/i.test(html))throw new Error('The website model did not return a complete page. Send the same request again and Fusion will retry with another free model.');
+       if(!/^<!doctype html>/i.test(html)||!/<html[\s>]/i.test(html)||!/<body[\s>]/i.test(html)||!/<\/body>/i.test(html)||!/<\/html>\s*$/i.test(html)||html.length<1200)throw new Error('Fusion detected an incomplete website response. Your previous project is safe. Retry this request and Fusion will use the free-model fallback again.');
        pending.body.textContent='Your website is ready. Preview it below or download the complete HTML file.';
        var frame=document.createElement('iframe');frame.title='ForgeFrame Fusion website preview';frame.sandbox='allow-scripts';frame.style.width='100%';frame.style.height='560px';frame.style.border='1px solid #343b45';frame.style.borderRadius='14px';frame.style.marginTop='16px';frame.srcdoc=html;pending.card.appendChild(frame);
        downloadable(new Blob([html],{type:'text/html'}),'forgeframe-fusion-site.html',pending.card);
