@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { canAdmin, canCreate, createAnonymousSession, founderEntitlement, proEntitlement, prototypeEntitlement, requiresSubscription } from "../src/entitlements.js";
+import { canAdmin, canCreate, createAnonymousSession, founderEntitlement, proEntitlement, prototypeEntitlement, requiresSubscription, entitlementForClaims } from "../src/entitlements.js";
 
 test("prototype entitlement has a bounded creation allowance", () => {
   assert.equal(prototypeEntitlement.plan, "prototype");
@@ -45,4 +45,12 @@ test("Founder unlimited product access remains separate from external spend", ()
   assert.equal(founderEntitlement.paidFallback, true);
   assert.equal(typeof founderEntitlement.externalSpendLimitUsd, "number");
   assert.ok((founderEntitlement.externalSpendLimitUsd ?? 0) > 0);
+});
+
+
+test("trusted account roles resolve to the correct entitlement", () => {
+  assert.equal(entitlementForClaims(null).plan, "prototype");
+  assert.equal(entitlementForClaims({ subject: "customer-1", roles: ["fusion:pro"] }).plan, "pro");
+  assert.equal(entitlementForClaims({ subject: "founder-1", roles: ["fusion:founder"] }).plan, "founder");
+  assert.equal(entitlementForClaims({ subject: "unknown", roles: ["founder"] }).plan, "prototype");
 });
