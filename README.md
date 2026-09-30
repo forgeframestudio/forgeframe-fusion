@@ -59,3 +59,34 @@ Fusion does not merge proprietary model weights, bypass provider authorization, 
 **Active V1 build.** The project has moved beyond architecture-only prototyping into outcome workflows and artifact generation.
 
 © 2026 ForgeFrame Studio. All rights reserved.
+
+
+## Fusion Operator / Founder Control
+
+Fusion is being built to operate as a permissioned business operator rather than a passive chatbot.
+
+```
+FOUNDER OBJECTIVE
+  ↓
+PLAN
+  ↓
+RUN SAFE PRE-AUTHORIZED WORK
+  ↓
+EXECUTE REGISTERED TOOLS
+  ↓
+VERIFY + RECORD AUDIT EVENTS
+  ↓
+STOP ONLY AT APPROVAL GATES
+  ↓
+FOUNDER APPROVES / DENIES
+  ↓
+CONTINUE
+```
+
+The current operator core includes risk-based permissions, an executable tool registry, a safe autopilot loop, explicit approve/deny transitions, a Founder Control snapshot, and an audit log. External actions are not considered implemented until a real authorized tool/integration exists.
+
+## Zero-upfront-cost commercial strategy
+
+Until customer revenue supports infrastructure investment, Fusion defaults to existing connected tools, GitHub/GitHub Pages, verified free tiers/open-source capabilities, and organic acquisition. Paid providers, ads, hosting, subscriptions, or other external spend remain explicit approval decisions.
+
+The immediate revenue goal is to use Fusion as ForgeFrame Studio's internal production and growth engine first, then turn proven workflows into customer-facing Fusion capabilities.
