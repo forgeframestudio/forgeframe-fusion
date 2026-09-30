@@ -74,3 +74,16 @@ export function requiresSubscription(entitlement: Entitlement): boolean {
 export function canAdmin(entitlement: Entitlement): boolean {
   return entitlement.admin === true;
 }
+
+
+export interface AccountClaims {
+  subject: string;
+  roles: string[];
+}
+
+export function entitlementForClaims(claims: AccountClaims | null): Entitlement {
+  if (!claims) return prototypeEntitlement;
+  if (claims.roles.includes("fusion:founder")) return founderEntitlement;
+  if (claims.roles.includes("fusion:pro")) return proEntitlement;
+  return prototypeEntitlement;
+}
